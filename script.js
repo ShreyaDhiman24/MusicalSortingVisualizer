@@ -1,4 +1,4 @@
-const n = 20; //Number of bar
+const n = 30; //Number of bar
 const array = [];
 
 init(); //automatically calls init whenever refreshed
@@ -92,4 +92,78 @@ function showBars(move) {
 }
 function stop() {
   animationStopped = true;
+}
+function insertionSort(array) {
+  const moves = []; // Keeping track of all the changes
+  for (let i = 1; i < array.length; i++) {
+    let j = i;
+    while (j > 0 && array[j - 1] > array[j]) {
+      moves.push({ indices: [j - 1, j], type: "swap" });
+      [array[j - 1], array[j]] = [array[j], array[j - 1]];
+      j--;
+    }
+  }
+  return moves;
+}
+function playInsertionSort() {
+  const copy = [...array];
+  const moves = insertionSort(copy);
+  animate(moves);
+}
+function selectionSort(array) {
+  const moves = []; // Keeping track of all the changes
+  for (let i = 0; i < array.length - 1; i++) {
+    let minIndex = i;
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] < array[minIndex]) {
+        minIndex = j;
+      }
+    }
+    if (minIndex !== i) {
+      moves.push({ indices: [i, minIndex], type: "swap" });
+      [array[i], array[minIndex]] = [array[minIndex], array[i]];
+    }
+  }
+  return moves;
+}
+function playSelectionSort() {
+  const copy = [...array];
+  const moves = selectionSort(copy);
+  animate(moves);
+}
+function rippleSort(array) {
+  const moves = []; // Keeping track of all the changes
+  let swapped;
+  do {
+    swapped = false;
+
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        moves.push({ indices: [i, i + 1], type: "swap" });
+        [array[i], array[i + 1]] = [array[i + 1], array[i]];
+        swapped = true;
+      }
+    }
+
+    if (!swapped) {
+      break;
+    }
+
+    swapped = false;
+
+    for (let i = array.length - 2; i >= 0; i--) {
+      if (array[i] > array[i + 1]) {
+        moves.push({ indices: [i, i + 1], type: "swap" });
+        [array[i], array[i + 1]] = [array[i + 1], array[i]];
+        swapped = true;
+      }
+    }
+  } while (swapped);
+
+  return moves;
+}
+function playRippleSort() {
+  const copy = [...array];
+  const moves = rippleSort(copy);
+  animate(moves);
 }
