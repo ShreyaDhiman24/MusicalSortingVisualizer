@@ -21,7 +21,7 @@ function playNote(freq) {
   osc.connect(node);
   node.connect(audioCtx.destination);
 }
-
+let animationStopped = false;
 // Function init
 function init() {
   // Generating random numbers
@@ -39,10 +39,12 @@ function play() {
   animate(moves);
 }
 function animate(moves) {
-  if (moves.length == 0) {
+  if (animationStopped || moves.length === 0) {
+    animationStopped = false; // Reset the flag for future animations
     showBars();
     return;
   }
+
   const move = moves.shift(); //shift method takes out the first elemnt of the moves array
   const [i, j] = move.indices;
   if (move.type == "swap") {
@@ -87,4 +89,7 @@ function showBars(move) {
     }
     container.appendChild(bar);
   }
+}
+function stop() {
+  animationStopped = true;
 }
