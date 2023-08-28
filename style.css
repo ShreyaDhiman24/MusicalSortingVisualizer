@@ -15,14 +15,28 @@ body {
   margin: 1px;
   margin-bottom: 10%;
 }
-button{
-    color: white;
-    font-weight: bold;
-    margin: 5px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 1px solid #008CBA;
+button {
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 1px solid #008cba;
 }
-.button1 {background-color:#008CBA;} /* Green */
-.button2 {background-color: #4CAF50;} /* Blue */
-.button3 {background-color: #f44336;} /* Red */
+.button1 {
+  background-color: #008cba;
+} /* Green */
+.button2 {
+  background-color: #4caf50;
+} /* Blue */
+.button3 {
+  background-color: #f44336;
+} /* Red */
+@media (max-width: 658px) {
+  /* Adjustments for small screens */
+  body {
+      text-align: center;
+      overflow: hidden;
+      font-size: 90%;
+  }
+}
